@@ -1,5 +1,4 @@
 FROM ubuntu:xenial
-
 MAINTAINER Danis Yogaswara <danis@aniqma.com>
 
 ENV OS_LOCALE="en_US.UTF-8"
@@ -21,7 +20,7 @@ RUN	\
 	&& add-apt-repository -y ppa:ondrej/php \
 	&& add-apt-repository -y ppa:ondrej/apache2 \
 	&& apt-get update \
-    && apt-get install -y curl apache2 	7.1 php7.1-cli php7.1-imagick php7.1-readline php7.1-mbstring php7.1-zip php7.1-intl php7.1-xml hp7.1-imagick php7.1-json php7.1-curl php7.1-mcrypt php7.1-gd php7.1-pgsql php7.1-mysql php-pear \
+    && apt-get install -y curl apache2 libapache2-mod-php7.1 php7.1-cli php7.1-readline php7.1-mbstring php7.1-zip php7.1-intl php7.1-xml php7.1-json php7.1-curl php7.1-mcrypt php7.1-gd php7.1-pgsql php7.1-mysql php-pear \
     # Apache settings
     && cp /dev/null ${APACHE_CONF_DIR}/conf-available/other-vhosts-access-log.conf \
     && rm ${APACHE_CONF_DIR}/sites-enabled/000-default.conf ${APACHE_CONF_DIR}/sites-available/000-default.conf \
@@ -39,8 +38,8 @@ RUN	\
 	&& ln -sf /dev/stderr /var/log/apache2/error.log \
 	&& chmod 755 /sbin/entrypoint.sh \
 	&& chown www-data:www-data ${PHP_DATA_DIR} -Rf
-
-RUN /bin/chown www-data:www-data -R /var/www/app
+	&& chown www-data:www-data /var/www/app -Rf
+	&& chown www-data:www-data /var/www/app/storage -Rf
 
 COPY ./configs/apache2.conf ${APACHE_CONF_DIR}/apache2.conf
 COPY ./configs/app.conf ${APACHE_CONF_DIR}/sites-enabled/app.conf
