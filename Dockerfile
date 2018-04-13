@@ -12,7 +12,7 @@ ENV APACHE_CONF_DIR=/etc/apache2 \
     PHP_CONF_DIR=/etc/php/7.1 \
     PHP_DATA_DIR=/var/lib/php
 
-COPY ./app /var/www/app/
+RUN mkdir /var/www/laravel
 COPY entrypoint.sh /sbin/entrypoint.sh
 
 RUN	\
