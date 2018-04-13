@@ -12,8 +12,8 @@ ENV APACHE_CONF_DIR=/etc/apache2 \
     PHP_CONF_DIR=/etc/php/7.1 \
     PHP_DATA_DIR=/var/lib/php
 
-RUN mkdir /var/www/laravel
-COPY entrypoint.sh /sbin/entrypoint.sh
+RUN mkdir /var/www/app
+COPY entrypoint.sh /sbin/entrypoint.sh	
 
 RUN	\
 	buildDeps='software-properties-common python-software-properties' \
