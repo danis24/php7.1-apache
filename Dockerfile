@@ -1,4 +1,4 @@
-FROM ubuntu
+FROM ubuntu:xenial
 
 MAINTAINER Danis Yogaswara <danis@aniqma.com>
 
